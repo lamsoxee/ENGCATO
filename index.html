@@ -118,6 +118,59 @@
   </section>
 
 
+  <!-- ==================== INTERACTIVE LEARNING SIMULATOR ==================== -->
+  <!-- Komponen simulasi belajar interaktif bareng Cato bergaya Duolingo -->
+  <section class="simulator-section" id="simulator">
+    <div class="section-header">
+      <span class="section-tagline">Main Bareng Cato!</span>
+      <h2 class="section-title">Coba Belajar Bareng Cato Sekarang! 🐾</h2>
+      <p class="section-subtitle">Sentuh jawabanmu dan lihat respon Cato!</p>
+    </div>
+
+    <div class="simulator-container">
+      <!-- Sisi Kiri: Chat Dialog Box & Cato Avatar -->
+      <div class="simulator-dialog-wrapper">
+        <div class="simulator-avatar-container">
+          <div class="simulator-cato-avatar">
+            <span class="cato-emoji">😸</span>
+            <div class="avatar-glasses">👓</div>
+          </div>
+          <span class="cato-name">CATO AI</span>
+        </div>
+        
+        <div class="simulator-speech-bubble">
+          <!-- Gambar Materi Belajar Simulator -->
+          <div class="simulator-media-box">
+            <img src="cat_hopping.png" alt="Cat Hopping" class="simulator-media-img">
+          </div>
+          
+          <p id="cato-sim-text">Hello friend! Look at the picture! I see a cute little cat. What is the cat doing? Is it sleeping or hopping? 😸</p>
+          
+          <!-- Tombol CTA tersembunyi, muncul setelah anak menjawab -->
+          <div id="sim-cta-container" class="sim-cta-hidden">
+            <button id="btn-sim-cta" class="btn btn-primary btn-bounce">
+              Seru Kan? Yuk Cobain Free Trial dan Main Bareng CATO 🚀
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sisi Kanan: Pilihan Jawaban Interaktif (Tombol Opsi 3D) -->
+      <div class="simulator-options-container">
+        <button class="sim-option-btn" data-response="sleeping">
+          <span class="option-letter">A</span> The cat is sleeping 💤
+        </button>
+        <button class="sim-option-btn" data-response="hopping">
+          <span class="option-letter">B</span> The cat is hopping! 🐈✨
+        </button>
+        <button class="sim-option-btn" data-response="running">
+          <span class="option-letter">C</span> The cat is running! 🐾
+        </button>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ==================== 3. FEATURES SECTION (FITUR UTAMA) ==================== -->
   <!-- Menjelaskan mengapa anak-anak menyukai ENGCATO dengan 3 kartu fitur utama -->
   <section class="features-section" id="features">
@@ -165,6 +218,62 @@
           Anak menyelesaikan teka-teki kata dan misi seru bersama Cato untuk mengasah Vocabulary dan Pemahaman.
         </p>
         <div class="card-wave"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== MEET YOUR AI TUTOR SECTION ==================== -->
+  <!-- Memperkenalkan maskot CATO AI Tutor dengan tata letak dua kolom -->
+  <section class="meet-tutor-section" id="meet-tutor">
+    <div class="section-header">
+      <span class="section-tagline">Kenalan Yuk!</span>
+      <h2 class="section-title">Berkenalan dengan Cato, Guru AI Pintar Si Kecil! 😸</h2>
+      <p class="section-subtitle">Dirancang khusus menggunakan metode 3C (Cepat, Cermat, Cerdas) untuk menemani anak Anda belajar tanpa bosan.</p>
+    </div>
+
+    <div class="tutor-container">
+      <!-- Kolom Kiri: Visual Maskot -->
+      <div class="tutor-visual-col">
+        <div class="tutor-img-frame">
+          <img src="cato.png" alt="Cat Hopping" class="cato-profile-img">
+        </div>
+      </div>
+
+      <!-- Kolom Kanan: Branding Nilai Karakter -->
+      <div class="tutor-cards-col">
+        <!-- Kartu 1: Fast -->
+        <div class="tutor-card border-yellow">
+          <div class="tutor-card-header">
+            <span class="tutor-card-icon bg-yellow-soft">⚡</span>
+            <h3 class="tutor-card-title">FAST (Cepat)</h3>
+          </div>
+          <p class="tutor-card-text">
+            Cato sangat cepat dalam menangkap dan merespon suara anak secara real-time, membuat interaksi terasa seperti mengobrol dengan teman asli.
+          </p>
+        </div>
+
+        <!-- Kartu 2: Careful -->
+        <div class="tutor-card border-green">
+          <div class="tutor-card-header">
+            <span class="tutor-card-icon bg-green-soft">🎯</span>
+            <h3 class="tutor-card-title">CAREFUL (Cermat)</h3>
+          </div>
+          <p class="tutor-card-text">
+            Cato dengan cermat membetulkan pelafalan (pronunciation) aksen anak Indonesia secara ramah, menumbuhkan rasa percaya diri sejak dini.
+          </p>
+        </div>
+
+        <!-- Kartu 3: Smart -->
+        <div class="tutor-card border-purple">
+          <div class="tutor-card-header">
+            <span class="tutor-card-icon bg-purple-soft">🧠</span>
+            <h3 class="tutor-card-title">SMART (Cerdas)</h3>
+          </div>
+          <p class="tutor-card-text">
+            Cato cerdas dalam memberikan metode gamifikasi, kuis adaptif, dan tantangan seru yang disesuaikan dengan kurikulum sekolah dasar.
+          </p>
+        </div>
       </div>
     </div>
   </section>

@@ -20,6 +20,11 @@ Jelaskan alasan di balik pemilihan elemen visual:
 ## 2. Fitur Interaktif Utama yang Wajib Didemonstrasikan (The "WOW" Factors)
 Saat presentasi, langsung tunjukkan fitur-fitur interaktif berikut di depan penguji:
 
+* **Interactive Learning Simulator (Gaya Gamifikasi Duolingo) [BARU]**:
+  * Tunjukkan widget interaktif tepat di bawah Hero. Cato bertanya: *"What is your favorite animal? 🦁🐶"*.
+  * Klik opsi jawaban A, B, atau C. Tunjukkan bagaimana tombol memiliki efek ketukan 3D yang sangat memuaskan (*satisfying press effect*).
+  * Perlihatkan transisi teks respon Cato yang memudar halus secara instan (`opacity transition`) beserta pemunculan tombol emas Call-to-Action (CTA) baru beranimasi membal: *"Seru Kan? Yuk Daftar Free Trial Bareng Ayah Bunda! 🚀"*.
+  * Tunjukkan bahwa jika tombol emas baru ini diklik, ia akan memicu pop-up pendaftaran modal WhatsApp.
 * **Hero Floating Mascot & Balon Obrolan**:
   * Tunjukkan bagaimana gambar maskot CATO mengambang naik-turun secara halus menggunakan animasi CSS Keyframes (`@keyframes floatMascot`).
   * Sorot balon percakapan interaktif (*chat bubble*) dan objek melayang (bintang, buku, game) yang bergerak secara independen untuk menciptakan kesan dinamis.
@@ -41,11 +46,12 @@ Tekankan ke penguji bahwa kode Anda ditulis dengan rapi dan terstruktur:
 * **Separation of Concerns (Pemisahan Tanggung Jawab)**: Kode dipisah secara modular ke dalam 3 file: `index.html` (kerangka konten), `style.css` (estetika styling), dan `script.js` (logika interaksi).
 * **Variabel CSS (CSS Custom Properties)**: Semua warna dan radius sudut dideklarasikan di `:root` sehingga sangat mudah diubah di kemudian hari (*maintainable*).
 * **CSS Grid & Flexbox Modern**: Penataan tata letak menggunakan CSS Grid dan Flexbox murni tanpa memerlukan framework berat (seperti Bootstrap) sehingga waktu muat halaman (*page load*) sangat cepat.
+* **Manipulasi DOM & State Management**: Logika simulator di `script.js` mengelola state kelas CSS (`.selected` untuk tombol terpilih, `.dimmed` untuk opsi lainnya) serta pengubahan konten secara aman dan halus menggunakan pewaktu (*setTimeout*).
 * **Responsivitas Penuh (Responsive Web Design)**:
   * Kecilkan ukuran jendela browser Anda untuk mendemonstrasikan bagaimana situs web menyesuaikan diri secara otomatis:
-    * **Desktop**: Grid harga menampilkan 4 kolom sejajar.
+    * **Desktop**: Grid harga menampilkan 4 kolom sejajar, simulator menampilkan tata letak 2 kolom (kiri obrolan, kanan tombol opsi).
     * **Tablet**: Grid harga berubah menjadi 2x2.
-    * **Mobile (HP)**: Grid harga menumpuk vertikal 1 kolom, dan menu navigasi atas berganti menjadi menu hamburger interaktif.
+    * **Mobile (HP)**: Grid harga dan simulator menumpuk vertikal 1 kolom, dan menu navigasi atas berganti menjadi menu hamburger interaktif.
 
 ---
 

@@ -109,4 +109,59 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // --- 5. LOGIKA INTERAKTIF SIMULATOR BELAJAR CATO (WIDGET GAYA DUOLINGO) ---
+  const simOptionBtns = document.querySelectorAll('.sim-option-btn');
+  const catoSimText = document.getElementById('cato-sim-text');
+  const simCtaContainer = document.getElementById('sim-cta-container');
+  const btnSimCta = document.getElementById('btn-sim-cta');
+
+  if (simOptionBtns.length > 0 && catoSimText && simCtaContainer && btnSimCta) {
+    const responses = {
+      sleeping: "Good try! But look closer, it's jumping joyfully! It is hopping! Let's try again! 🌟",
+      hopping: "Excellent! You are Fast, Careful, and Smart! Yes, the cat is hopping! Great job! 🎉 Segera tunjukkan kehebatanmu ke Ayah dan Bunda!",
+      running: "Good try! But look closer, it's jumping joyfully! It is hopping! Let's try again! 🌟"
+    };
+
+    simOptionBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const responseKey = btn.getAttribute('data-response');
+        
+        // Update dialog chat Cato dengan respon ceria
+        if (responses[responseKey]) {
+          // Transisi text halus
+          catoSimText.style.opacity = 0;
+          setTimeout(() => {
+            catoSimText.textContent = responses[responseKey];
+            catoSimText.style.opacity = 1;
+          }, 150);
+        }
+
+        // Atur status kelas tombol (Terpilih vs Buram)
+        simOptionBtns.forEach(b => {
+          b.classList.remove('selected');
+          b.classList.add('dimmed');
+        });
+        btn.classList.remove('dimmed');
+        btn.classList.add('selected');
+
+        // Munculkan tombol emas CTA hanya untuk respon sukses (jawaban benar: hopping)
+        if (responseKey === 'hopping') {
+          if (simCtaContainer.classList.contains('sim-cta-hidden')) {
+            simCtaContainer.classList.remove('sim-cta-hidden');
+            simCtaContainer.classList.add('sim-cta-visible');
+          }
+        } else {
+          // Sembunyikan jika memilih jawaban salah
+          simCtaContainer.classList.add('sim-cta-hidden');
+          simCtaContainer.classList.remove('sim-cta-visible');
+        }
+      });
+    });
+
+    // Hubungkan tombol CTA simulator ke modal pendaftaran Free Trial
+    btnSimCta.addEventListener('click', (e) => {
+      openModal(e);
+    });
+  }
 });
