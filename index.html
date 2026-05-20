@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- Membuat halaman web responsif di semua perangkat (HP, Tablet, Laptop) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGCATO - Learn English with CATO! | Aplikasi Belajar Bahasa Inggris Anak Berbasis AI</title>
+  
+  <!-- Deskripsi SEO Halaman -->
+  <meta name="description" content="Belajar bahasa Inggris menyenangkan bersama CATO, kucing AI berkacamata! Didesain khusus untuk anak usia 4-12 tahun di Indonesia untuk belajar berbicara, membaca, dan menulis dengan seru.">
+  
+  <!-- Google Fonts: Fredoka (Font membulat ramah anak untuk judul) & Outfit (Font modern dan bersih untuk tulisan isi) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN untuk ikon-ikon cantik seperti bintang, buku, telepon, dsb. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Menghubungkan file HTML ini dengan file style.css untuk mengatur tampilan visual -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== 1. NAVBAR (NAVIGASI ATAS) ==================== -->
+  <!-- Header berisi logo dan menu navigasi. Didesain melayang (sticky) dengan efek kaca buram (glassmorphism) -->
+  <header class="navbar-container">
+    <div class="navbar-content">
+      <!-- Logo brand dengan emoji cakar kucing lucu -->
+      <a href="#" class="logo" id="nav-logo">
+        ENGCATO<span>🐾</span>
+      </a>
+
+      <!-- Menu navigasi untuk layar desktop -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#features" class="nav-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Fitur</a>
+        <a href="#pricing" class="nav-link"><i class="fa-solid fa-tags"></i> Harga</a>
+        <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Kontak</a>
+      </nav>
+
+      <!-- Tombol aksi cepat dan tombol hamburger menu (untuk tampilan mobile) -->
+      <div class="nav-actions">
+        <a href="#pricing" class="btn btn-primary btn-nav">Coba Gratis</a>
+        <!-- Tombol hamburger yang akan muncul di layar HP untuk membuka menu -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Buka Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==================== 2. HERO SECTION (HALAMAN UTAMA/PERTAMA) ==================== -->
+  <!-- Bagian pembuka website yang menarik perhatian, berisi slogan utama, tombol ajakan bertindak (CTA), dan maskot CATO -->
+  <section class="hero-section" id="hero">
+    <div class="hero-background-shapes">
+      <!-- Bentuk-bentuk dekorasi abstrak di latar belakang agar terlihat dinamis -->
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="hero-container">
+      <!-- Kolom Kiri: Teks Promosi & Tombol CTA -->
+      <div class="hero-text">
+        <div class="badge-promo">
+          <span class="badge-icon">✨</span> Aplikasi Belajar AI Anak No. 1 di Indonesia
+        </div>
+        <h1 class="hero-title">Learn English with CATO!</h1>
+        <p class="hero-description">
+          Ajak buah hati Anda berpetualang seru belajar Bahasa Inggris bersama <strong>CATO</strong>, kucing pintar AI berkacamata! Pendekatan interaktif yang dirancang khusus untuk melatih keberanian anak usia 4-12 tahun berbicara dengan percaya diri.
+        </p>
+        
+        <!-- Area Tombol CTA Utama -->
+        <div class="hero-cta-group">
+          <!-- id="hero-cta-btn" digunakan untuk memicu modal JavaScript -->
+          <a href="#pricing" id="hero-cta-btn" class="btn btn-large btn-cta animate-pulse">
+            Coba Gratis 14 Hari <i class="fa-solid fa-chevron-right icon-btn"></i>
+          </a>
+          <span class="cta-note">*Tanpa kartu kredit. Batalkan kapan saja.</span>
+        </div>
+
+        <!-- Fitur Keunggulan Singkat (Trust Indicators) -->
+        <div class="hero-benefits">
+          <div class="benefit-item">
+            <i class="fa-solid fa-shield-cat benefit-icon"></i>
+            <span>100% Aman & Ramah Anak</span>
+          </div>
+          <div class="benefit-item">
+            <i class="fa-solid fa-face-laugh-beam benefit-icon"></i>
+            <span>Belajar Sambil Bermain</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kolom Kanan: Ilustrasi Maskot CATO dengan Efek Interaktif -->
+      <div class="hero-visual">
+        <div class="mascot-wrapper">
+          <!-- Balon percakapan interaktif dari CATO -->
+          <div class="chat-bubble-cato">
+            <span class="chat-text">Hi, kids! Let's talk in English! 😺👓</span>
+            <div class="chat-arrow"></div>
+          </div>
+          
+          <!-- Latar belakang lingkaran bercahaya untuk maskot -->
+          <div class="mascot-bg-glow"></div>
+          
+          <!-- Gambar Maskot CATO (Menggunakan gambar yang telah digenerate AI) -->
+          <img src="assets/cato_mascot.png" alt="CATO - Maskot Kucing Oranye Berkacamata" class="mascot-img">
+          
+          <!-- Elemen melayang dekoratif (bintang, buku) -->
+          <div class="floating-item float-star"><i class="fa-solid fa-star"></i></div>
+          <div class="floating-item float-book"><i class="fa-solid fa-book-open"></i></div>
+          <div class="floating-item float-game"><i class="fa-solid fa-puzzle-piece"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 3. FEATURES SECTION (FITUR UTAMA) ==================== -->
+  <!-- Menjelaskan mengapa anak-anak menyukai ENGCATO dengan 3 kartu fitur utama -->
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <span class="section-tagline">Kenapa Anak-Anak Suka ENGCATO?</span>
+      <h2 class="section-title">Fitur Spesial yang Bikin Belajar Jadi Nagih!</h2>
+      <p class="section-subtitle">Didesain dengan konsep gamifikasi dan AI interaktif agar anak belajar bahasa Inggris secara alami tanpa rasa bosan.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Kartu Fitur 1: Talk to Cato -->
+      <div class="feature-card coral-theme" id="feature-talk">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <h3 class="feature-card-title">Talk to Cato</h3>
+        <p class="feature-card-subtitle">Speaking & Listening</p>
+        <p class="feature-card-description">
+          Anak berbicara langsung dengan Cato dan menjawab pertanyaan sederhana untuk melatih skill Speaking dan Listening.
+        </p>
+        <div class="card-wave"></div>
+      </div>
+
+      <!-- Kartu Fitur 2: Read with Cato -->
+      <div class="feature-card blue-theme" id="feature-read">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-book-open-reader"></i>
+        </div>
+        <h3 class="feature-card-title">Read with Cato</h3>
+        <p class="feature-card-subtitle">Reading & Pronunciation</p>
+        <p class="feature-card-description">
+          Anak membaca buku cerita pendek dengan bersuara keras sementara Cato menyimak untuk melatih Reading dan Pronunciation.
+        </p>
+        <div class="card-wave"></div>
+      </div>
+
+      <!-- Kartu Fitur 3: Play with Cato -->
+      <div class="feature-card yellow-theme" id="feature-play">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+        <h3 class="feature-card-title">Play with Cato</h3>
+        <p class="feature-card-subtitle">Writing, Vocabulary & Understanding</p>
+        <p class="feature-card-description">
+          Anak menyelesaikan teka-teki kata dan misi seru bersama Cato untuk mengasah Vocabulary dan Pemahaman.
+        </p>
+        <div class="card-wave"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 4. PRICING SECTION (PAKET HARGA) ==================== -->
+  <!-- Kartu paket harga transparan yang menarik bagi orang tua. Dilengkapi ornamen pendukung trust -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-background-decoration">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+    </div>
+    
+    <div class="section-header">
+      <span class="section-tagline text-white">Investasi Terbaik Ayah & Bunda</span>
+      <h2 class="section-title text-white">Pilihan Paket Belajar yang Transparan</h2>
+      <p class="section-subtitle text-white-muted">Mulai dengan gratis dan pilih paket berlangganan sesuai kebutuhan belajar buah hati Anda. Tanpa komitmen tersembunyi.</p>
+    </div>
+
+    <!-- Tampilan grid diperluas menjadi 4 kartu untuk menampung Annual Plan -->
+    <div class="pricing-grid">
+      <!-- Paket 1: Free Trial (Pemicu Modal) -->
+      <div class="pricing-card" id="price-free">
+        <div class="pricing-header">
+          <h3 class="pricing-name">Free Trial</h3>
+          <p class="pricing-description">Akses penuh 14 hari untuk mencoba sebelum berlangganan</p>
+          <div class="pricing-price">
+            <span class="currency">IDR</span>
+            <span class="amount">0</span>
+            <span class="period">14 hari</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Akses penuh fitur "Talk to Cato"</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> 5 Buku Cerita Interaktif Pilihan</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> 10 Game Kosakata & Ejaan</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Laporan mingguan dasar untuk orang tua</li>
+            <li><i class="fa-solid fa-circle-xmark text-muted"></i> Tanpa Pendampingan Guru Kurikulum</li>
+          </ul>
+        </div>
+        <div class="pricing-action">
+          <!-- id="free-trial-btn" digunakan untuk memicu modal JavaScript -->
+          <a href="#pricing" id="free-trial-btn" class="btn btn-outline btn-full">Mulai Uji Coba</a>
+        </div>
+      </div>
+
+      <!-- Paket 2: Monthly Plan (Kombinasi Warna Utama / Terpopuler) -->
+      <div class="pricing-card popular" id="price-monthly">
+        <div class="popular-badge">Paling Populer ⭐</div>
+        <div class="pricing-header">
+          <h3 class="pricing-name">Monthly Plan</h3>
+          <p class="pricing-description">Cocok untuk keluarga yang ingin membayar bulanan</p>
+          <div class="pricing-price">
+            <span class="currency">Rp</span>
+            <span class="amount">100.000</span>
+            <span class="period">/ bulan</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Obrolan "Talk to Cato" <strong>Tanpa Batas 24/7</strong></li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Ratusan Buku Cerita & Konten Baru Mingguan</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Seluruh Mini-Games & Tantangan Ejaan</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Laporan Perkembangan Detail (Dashboard Wali)</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Akses Komunitas Orang Tua ENGCATO</li>
+          </ul>
+        </div>
+        <div class="pricing-action">
+          <a href="#pricing" class="btn btn-primary btn-full animate-bounce">Pilih Paket Bulanan</a>
+        </div>
+      </div>
+
+      <!-- Paket 3: Annual Plan [BARU] (Komitmen penuh hemat 10%) -->
+      <div class="pricing-card" id="price-annual">
+        <div class="pricing-header">
+          <div class="annual-saving-badge">Hemat 10% 🎓</div>
+          <h3 class="pricing-name">Annual Plan</h3>
+          <p class="pricing-description">Hemat 10%, komitmen penuh untuk satu tahun ajaran</p>
+          <div class="pricing-price">
+            <span class="currency">Rp</span>
+            <span class="amount">900.000</span>
+            <span class="period">/ tahun</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Semua fitur premium Monthly Plan terakses</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Rapor perkembangan komprehensif tiap Semester</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Prioritas Sesi Pendampingan Guru Kurikulum</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Akses eksklusif webinar bulanan orang tua</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Lebih murah, setara Rp75.000/bulan!</li>
+          </ul>
+        </div>
+        <div class="pricing-action">
+          <a href="#pricing" class="btn btn-outline btn-full">Pilih Paket Tahunan</a>
+        </div>
+      </div>
+
+      <!-- Paket 4: Family Plan (Akses hemat keluarga) -->
+      <div class="pricing-card" id="price-family">
+        <div class="pricing-header">
+          <h3 class="pricing-name">Family Plan</h3>
+          <p class="pricing-description">Akses hemat untuk hingga 3 anak dalam satu rumah</p>
+          <div class="pricing-price">
+            <span class="currency">Rp</span>
+            <span class="amount">250.000</span>
+            <span class="period">/ bulan</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fa-solid fa-circle-check text-success"></i> <strong>Hingga 3 Profil Anak</strong> terpisah</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Laporan perkembangan mandiri tiap anak</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Semua fitur premium Monthly Plan terakses</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Sesi konsultasi kurikulum bulanan</li>
+            <li><i class="fa-solid fa-circle-check text-success"></i> Bonus Worksheet fisik dikirim ke rumah</li>
+          </ul>
+        </div>
+        <div class="pricing-action">
+          <a href="#pricing" class="btn btn-outline btn-full">Pilih Paket Keluarga</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 5. TESTIMONI ORANG TUA ==================== -->
+  <!-- Menampilkan ulasan fiktif dari orang tua yang puas dengan aplikasi ENGCATO -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-header">
+      <span class="section-tagline">Ulasan Jujur Ayah & Bunda</span>
+      <h2 class="section-title">Apa Kata Orang Tua Tentang ENGCATO?</h2>
+      <p class="section-subtitle">Lebih dari 10.000+ orang tua di Indonesia telah mempercayakan belajar Bahasa Inggris buah hati mereka bersama Cato.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <!-- Testimoni 1: Bunda di Jakarta -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <p class="testimonial-quote">
+          "Sebelumnya anak saya (6 tahun) sangat pemalu kalau diminta bicara bahasa Inggris. Tapi sejak ngobrol dengan Cato, dia jadi ketagihan! Cato sangat sabar membetulkan ucapannya yang keliru. Sekarang dia sering tiba-tiba ngomong bahasa Inggris di rumah. Luar biasa!"
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-bunda">
+            <i class="fa-solid fa-face-smile-wink"></i>
+          </div>
+          <div class="author-info">
+            <h4 class="author-name">Bunda Rina Kartika</h4>
+            <p class="author-meta">Orang Tua dari Alif (6 th) | Jakarta</p>
+          </div>
+        </div>
+        <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+      </div>
+
+      <!-- Testimoni 2: Ayah di Surabaya -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <p class="testimonial-quote">
+          "Game kuis kosakata di 'Play with Cato' seru sekali. Biasanya anak saya cuma main game kosong di HP, sekarang HP-nya dipakai untuk belajar kosakata baru setiap sore. Annual plan-nya sangat hemat untuk satu tahun ajaran penuh!"
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-ayah">
+            <i class="fa-solid fa-face-smile-beam"></i>
+          </div>
+          <div class="author-info">
+            <h4 class="author-name">Ayah Budi Prasetyo</h4>
+            <p class="author-meta">Orang Tua dari Kirana (8 th) | Surabaya</p>
+          </div>
+        </div>
+        <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 6. FOOTER (BAGIAN BAWAH & KONTAK) ==================== -->
+  <!-- Menyajikan informasi legalitas hak cipta, kontak telepon Whatsapp, website, dan navigasi tambahan -->
+  <footer class="footer-section" id="contact">
+    <div class="footer-container">
+      <!-- Kolom Info Perusahaan -->
+      <div class="footer-column brand-col">
+        <a href="#" class="footer-logo">
+          ENGCATO<span>🐾</span>
+        </a>
+        <p class="footer-tagline">
+          Menjembatani masa depan anak Indonesia untuk fasih berbahasa Inggris dengan asyik bersama teknologi kecerdasan buatan (AI) yang ramah anak.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Kolom Tautan Navigasi Cepat -->
+      <div class="footer-column">
+        <h4 class="footer-title">Tautan Cepat</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">Beranda</a></li>
+          <li><a href="#features">Fitur Utama</a></li>
+          <li><a href="#pricing">Pilihan Harga</a></li>
+          <li><a href="#pricing">Coba Gratis 14 Hari</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom Informasi Kontak Langsung -->
+      <div class="footer-column contact-col">
+        <h4 class="footer-title">Hubungi Kami</h4>
+        <ul class="contact-info">
+          <li>
+            <i class="fa-solid fa-phone contact-icon"></i>
+            <div>
+              <span class="contact-label">Telepon / WhatsApp:</span>
+              <a href="https://wa.me/6282136288719" target="_blank" rel="noopener noreferrer" class="contact-value">+62 821-3628-8719</a>
+            </div>
+          </li>
+          <li>
+            <i class="fa-solid fa-envelope contact-icon"></i>
+            <div>
+              <span class="contact-label">Email Support:</span>
+              <a href="mailto:support@engcato.com" class="contact-value">support@engcato.com</a>
+            </div>
+          </li>
+          <li>
+            <i class="fa-solid fa-globe contact-icon"></i>
+            <div>
+              <span class="contact-label">Website Resmi:</span>
+              <a href="https://www.engcato.com" target="_blank" rel="noopener noreferrer" class="contact-value">www.engcato.com</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Garis Pembatas dan Hak Cipta -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2026 ENGCATO oleh <strong>Aslam Nurdin Anwar</strong>. Hak Cipta Dilindungi.</p>
+        <p class="footer-sub-copyright">Made with 🧡 for kids education in Indonesia.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==================== 6. CUSTOM MODAL (POP-UP PENDAFTARAN) ==================== -->
+  <!-- Pop-up modal interaktif yang muncul ketika pendaftaran Free Trial berhasil dilakukan -->
+  <div class="modal-backdrop" id="modal-free-trial">
+    <div class="modal-box">
+      <!-- Ornamen Ikon Kucing Cato Ceria di Bagian Atas Modal -->
+      <div class="modal-cato-face">😸👓</div>
+      
+      <h3 class="modal-title">Pendaftaran Sukses!</h3>
+      <p class="modal-message">
+        Terima kasih telah memilih <strong>ENGCATO</strong>! Pendaftaran Free Trial Anda berhasil dikirim ke WhatsApp <span class="wa-highlight">+6282136288719</span>.
+      </p>
+      <div class="modal-whatsapp-note">
+        <i class="fa-brands fa-whatsapp"></i> Cato akan segera menghubungi Ayah / Bunda dalam 5 menit.
+      </div>
+      
+      <button class="btn btn-primary btn-modal-close" id="btn-close-modal">Tutup</button>
+    </div>
+  </div>
+
+
+  <!-- ==================== SCRIPTS (LOGIKA HALAMAN) ==================== -->
+  <!-- Menghubungkan file script.js eksternal yang bersih dan terpisah -->
+  <script src="script.js"></script>
+</body>
+</html>
