@@ -841,6 +841,7 @@ img {
   align-items: flex-start;
   transition: var(--transition-smooth);
   z-index: 2;
+  cursor: pointer;
 }
 
 /* Lingkaran Ikon dalam Kartu */
@@ -1018,6 +1019,7 @@ img {
   border-radius: 20px;
   padding: 1.5rem 1.75rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .tutor-card:hover {

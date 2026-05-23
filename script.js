@@ -52,61 +52,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- 4. LOGIKA MODAL POP-UP CANTIK (FREE TRIAL SUCCESS) ---
-  const modal = document.getElementById('modal-free-trial');
-  const closeModalBtn = document.getElementById('btn-close-modal');
-  
-  // Ambil tombol-tombol pemicu modal
-  const heroCtaBtn = document.getElementById('hero-cta-btn');
-  const freeTrialBtn = document.getElementById('free-trial-btn');
+  // --- 4. ALUR PENGALIHAN TOMBOL (SMOOTH SCROLL KE CTA WHATSAPP DI BAWAH) ---
+  const ctaWhatsappBtn = document.getElementById('cta-whatsapp');
   const freeTrialCard = document.getElementById('price-free');
+  
+  // Ambil semua tombol dengan class btn-scroll-to-cta dan kartu interaktif
+  const btnScrolls = document.querySelectorAll('.btn-scroll-to-cta');
+  const featureCards = document.querySelectorAll('.feature-card');
+  const tutorCards = document.querySelectorAll('.tutor-card');
 
-  // Fungsi untuk membuka modal
-  const openModal = (e) => {
-    e.preventDefault(); // Mencegah lompatan link default
-    if (modal) {
-      modal.classList.add('open');
+  // Fungsi helper untuk scroll halus ke tombol Uji Coba Paling Bawah (CTA WhatsApp)
+  const scrollToFreeTrial = (e) => {
+    e.preventDefault();
+    if (ctaWhatsappBtn) {
+      ctaWhatsappBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (freeTrialCard) {
+      freeTrialCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
-  // Fungsi untuk menutup modal
-  const closeModal = () => {
-    if (modal) {
-      modal.classList.remove('open');
-    }
+  // Fungsi helper untuk membuka WhatsApp dengan pesan otomatis terstruktur
+  const openWhatsApp = (e) => {
+    e.preventDefault();
+    const phoneNumber = "6282136288719";
+    const message = "Halo ENGCATO! 👋 Anak saya baru saja mencoba simulator belajar bareng Cato di website dan suka sekali! 🐈✨ Saya tertarik mendaftarkan anak saya untuk program Free Trial. Mohon informasi langkah selanjutnya ya, terima kasih! 😸";
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    window.open(waUrl, '_blank');
   };
 
-  // Pasang event listener ke tombol CTA Hero
-  if (heroCtaBtn) {
-    heroCtaBtn.addEventListener('click', openModal);
+  // Pasang event listener ke tombol konversi paling bawah (kirim pesan WA)
+  if (ctaWhatsappBtn) {
+    ctaWhatsappBtn.addEventListener('click', openWhatsApp);
   }
 
-  // Pasang event listener ke tombol Uji Coba di dalam kartu Free Trial
-  if (freeTrialBtn) {
-    freeTrialBtn.addEventListener('click', openModal);
-  }
-
-  // Pasang event listener tambahan jika pengguna mengklik area kartu Free Trial (opsional/menjawab instruksi "kartu Free Trial diklik")
+  // Pasang event listener ke seluruh area kartu Free Trial (kirim pesan WA)
   if (freeTrialCard) {
     freeTrialCard.addEventListener('click', (e) => {
-      // Pastikan modal hanya terbuka jika bukan klik pada link lain di dalam kartu
+      // Pastikan bukan link lain yang diklik
       if (e.target.tagName !== 'A' && e.target.parentElement.tagName !== 'A') {
-        openModal(e);
+        openWhatsApp(e);
       }
     });
   }
 
-  // Pasang event listener ke tombol Tutup di dalam modal
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
+  // Pasang event listener ke semua tombol dengan class btn-scroll-to-cta (scroll ke bawah)
+  if (btnScrolls.length > 0) {
+    btnScrolls.forEach(btn => {
+      btn.addEventListener('click', scrollToFreeTrial);
+    });
   }
 
-  // Menutup modal jika pengguna mengklik area luar modal (backdrop abu-abu)
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
+  // Pasang event listener ke semua kartu di seksi Fitur/Kurikulum (scroll ke bawah)
+  if (featureCards.length > 0) {
+    featureCards.forEach(card => {
+      card.addEventListener('click', scrollToFreeTrial);
+    });
+  }
+
+  // Pasang event listener ke semua kartu di seksi Meet Cato (scroll ke bawah)
+  if (tutorCards.length > 0) {
+    tutorCards.forEach(card => {
+      card.addEventListener('click', scrollToFreeTrial);
     });
   }
 
@@ -159,9 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Hubungkan tombol CTA simulator ke modal pendaftaran Free Trial
-    btnSimCta.addEventListener('click', (e) => {
-      openModal(e);
-    });
+    // Hubungkan tombol CTA simulator ke smooth scroll menuju tombol Uji Coba paling bawah
+    btnSimCta.addEventListener('click', scrollToFreeTrial);
   }
 });

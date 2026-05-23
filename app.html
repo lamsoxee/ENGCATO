@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar Bareng Cato 🐾 | ENGCATO Workspace</title>
+  
+  <!-- Font Google: Fredoka (Rounded) & Outfit (Sans-Serif) + CDN FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* VARIABLES & RESET SYSTEM */
+    :root {
+      --coral-primary: hsl(11, 100%, 60%);
+      --coral-light: hsl(11, 100%, 96%);
+      --coral-dark: hsl(11, 80%, 45%);
+      --blue-primary: hsl(210, 100%, 60%);
+      --blue-light: hsl(210, 100%, 96%);
+      --blue-dark: hsl(210, 80%, 40%);
+      --green-primary: hsl(142, 70%, 45%);
+      --green-light: hsl(142, 70%, 95%);
+      --green-dark: hsl(142, 70%, 30%);
+      --yellow-primary: #fbbf24;
+      --yellow-dark: #d97706;
+      --text-dark: hsl(220, 40%, 20%);
+      --text-muted: hsl(220, 20%, 50%);
+      --bg-white: #ffffff;
+      
+      --font-title: 'Fredoka', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: radial-gradient(circle at 10% 20%, hsl(210, 100%, 98%) 0%, hsl(200, 100%, 95%) 90%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* BACKGROUND GRADIENT DECORATIONS */
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 90, 54, 0.08) 0%, rgba(26, 128, 230, 0.05) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .circle-1 { width: 350px; height: 350px; top: -100px; left: -100px; }
+    .circle-2 { width: 450px; height: 450px; bottom: -150px; right: -150px; }
+    .circle-3 { width: 200px; height: 200px; top: 30%; right: 5%; }
+
+    /* HEADER & STATS CONTAINER */
+    header {
+      width: 100%;
+      padding: 1.5rem 2rem 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      max-width: 1000px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background-color: var(--bg-white);
+      color: var(--text-dark);
+      border: 3px solid #e2e8f0;
+      border-radius: 16px;
+      font-family: var(--font-title);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 0 #cbd5e1;
+      z-index: 10;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #cbd5e1;
+      border-color: var(--blue-primary);
+      color: var(--blue-primary);
+    }
+
+    .btn-back:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #cbd5e1;
+    }
+
+    /* GAME SYSTEM STATS (COMBO & HEALTH) */
+    .game-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--bg-white);
+      padding: 0.6rem 1.5rem;
+      border-radius: 20px;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 6px 0 #cbd5e1;
+      transition: opacity 0.3s ease;
+    }
+
+    .combo-streak {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--yellow-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .combo-streak i {
+      font-size: 1.25rem;
+      color: #f97316;
+      animation: pulseStar 1.5s infinite;
+    }
+
+    .health-bar {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .heart-icon {
+      font-size: 1.35rem;
+      color: #ef4444;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .heart-icon.lost {
+      color: #cbd5e1;
+      transform: scale(0.85);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--coral-primary);
+      letter-spacing: 0.5px;
+    }
+
+    /* MAIN CONTAINER STAGE */
+    .main-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+      padding: 1rem 2rem 3rem 2rem;
+      z-index: 5;
+      position: relative;
+    }
+
+    /* STAGES FOR SEAMLESS TRANSITIONS */
+    .app-stage {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .app-stage.hidden-stage {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+      display: none !important;
+    }
+
+    /* ==================================================== */
+    /* KUIS WORKSPACE STAGE                                 */
+    /* ==================================================== */
+    .stage-title-banner {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      color: var(--blue-primary);
+      background-color: var(--blue-light);
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      border: 2px solid #93c5fd;
+      font-weight: 600;
+      box-shadow: 0 4px 0 #bfdbfe;
+      margin-bottom: 1.5rem;
+    }
+
+    .speech-bubble-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 620px;
+    }
+
+    .speech-bubble {
+      background-color: var(--bg-white);
+      border: 4px solid var(--coral-primary);
+      border-radius: 28px;
+      padding: 1.75rem 4rem 1.75rem 2.25rem;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: 0 10px 25px rgba(255, 90, 54, 0.08);
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 22px 20px 0;
+      border-style: solid;
+      border-color: var(--coral-primary) transparent;
+      display: block;
+      width: 0;
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 18px 16px 0;
+      border-style: solid;
+      border-color: var(--bg-white) transparent;
+      display: block;
+      width: 0;
+      z-index: 1;
+    }
+
+    .btn-speaker {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--blue-light);
+      border: 2px solid var(--blue-primary);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 0 #93c5fd;
+    }
+
+    .btn-speaker:hover {
+      transform: scale(1.08);
+      background-color: var(--blue-primary);
+      color: white;
+    }
+
+    .btn-speaker:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #93c5fd;
+    }
+
+    .mascot-container {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .cato-avatar-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cato-avatar {
+      width: 165px;
+      height: 165px;
+      border-radius: 50%;
+      background-color: var(--bg-white);
+      border: 6px solid var(--blue-primary);
+      box-shadow: 0 10px 25px rgba(26, 128, 230, 0.15);
+      padding: 10px;
+      object-fit: contain;
+      animation: floatMascot 4s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .cato-avatar.state-correct {
+      border-color: var(--green-primary);
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.25);
+      animation: bounceCorrect 0.6s ease;
+    }
+
+    .cato-avatar.state-incorrect {
+      border-color: var(--coral-primary);
+      box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+      animation: shakeMascot 0.5s ease;
+    }
+
+    .expression-badge {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background-color: var(--bg-white);
+      border: 4px solid var(--blue-primary);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pulseStar 2s infinite;
+      z-index: 3;
+    }
+
+    .state-correct + .expression-badge { border-color: var(--green-primary); transform: scale(1.1); }
+    .state-incorrect + .expression-badge { border-color: var(--coral-primary); transform: scale(1.1); }
+
+    .star-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #fde047;
+      border: 3px solid #eab308;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b45309;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 4;
+    }
+
+    .choices-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .choice-btn {
+      background-color: var(--bg-white);
+      border: 3px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 1.25rem;
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      box-shadow: 0 6px 0 #cbd5e1;
+      position: relative;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--blue-primary);
+      background-color: var(--blue-light);
+      color: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 #93c5fd;
+    }
+
+    .choice-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #cbd5e1;
+    }
+
+    .choice-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .choice-btn.correct {
+      border-color: var(--green-primary) !important;
+      background-color: var(--green-light) !important;
+      color: var(--green-dark) !important;
+      box-shadow: 0 6px 0 #86efac !important;
+    }
+    .choice-btn.correct:active { transform: translateY(4px) !important; box-shadow: 0 2px 0 #86efac !important; }
+
+    .choice-btn.incorrect {
+      border-color: var(--coral-primary) !important;
+      background-color: var(--coral-light) !important;
+      color: var(--coral-dark) !important;
+      box-shadow: 0 6px 0 #fca5a5 !important;
+      animation: shake 0.4s ease;
+    }
+    .choice-btn.incorrect:active { transform: translateY(4px) !important; box-shadow: 0 2px 0 #fca5a5 !important; }
+
+
+    /* ==================================================== */
+    /* ADVENTURE MAP STAGE (CATO'S PAW ROADMAP)            */
+    /* ==================================================== */
+    .map-wrapper {
+      display: flex;
+      width: 100%;
+      max-width: 900px;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-top: 1rem;
+    }
+
+    .map-content-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Scratching Post Banner */
+    .scratching-post-banner {
+      width: 100%;
+      background: linear-gradient(135deg, #b58a63 0%, #8e6239 100%);
+      border: 6px solid #d9f99d; /* Lime accent */
+      border-radius: 24px;
+      padding: 1.25rem 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 10px 0 #5c3e21, 0 10px 25px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .scratching-post-banner::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .scratching-post-banner h2 {
+      font-family: var(--font-title);
+      font-size: 1.85rem;
+      text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      margin-bottom: 0.25rem;
+    }
+
+    .scratching-post-banner p {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #fef08a;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* The Paw Print Path */
+    .path-container {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    /* Dashed cat tail path line */
+    .path-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      border-left: 6px dashed #b45309;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    /* Level Nodes (Winding Zig-Zag) */
+    .path-node {
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    /* Zig-zag offset styling */
+    .path-node:nth-child(1) { transform: translateX(-35px); }
+    .path-node:nth-child(2) { transform: translateX(35px); }
+    .path-node:nth-child(3) { transform: translateX(-25px); }
+    .path-node:nth-child(4) { transform: translateX(25px); }
+
+    .node-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 6px solid #cbd5e1;
+      background-color: #cbd5e1;
+      color: #94a3b8;
+      font-size: 2.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: not-allowed;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 0 #94a3b8;
+      position: relative;
+    }
+
+    /* Node Level Label Number */
+    .node-level-label {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--text-dark);
+      color: white;
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    /* Level 1: Completed node (Golden Fish) */
+    .node-btn.completed {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      border-color: #fef08a;
+      color: #7c2d12;
+      cursor: pointer;
+      box-shadow: 0 8px 0 #b45309;
+    }
+    
+    .node-btn.completed:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 10px 0 #b45309;
+    }
+
+    .node-btn.completed:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #b45309;
+    }
+
+    .node-btn .check-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background-color: #22c55e;
+      color: white;
+      border: 3px solid white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Level 2: Active Node (Pulsing Green Paw) */
+    .node-btn.active {
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+      border-color: #bbf7d0;
+      color: #14532d;
+      cursor: pointer;
+      box-shadow: 0 8px 0 #15803d;
+      animation: pulseActiveNode 2s infinite;
+    }
+
+    .node-btn.active:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 10px 0 #15803d;
+    }
+
+    .node-btn.active:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #15803d;
+    }
+
+    /* ACTIVE PLAY TOOLTIP */
+    .node-play-tooltip {
+      position: absolute;
+      top: -46px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--green-primary);
+      color: white;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.35rem 1rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+      white-space: nowrap;
+      animation: bounceTooltip 1.5s infinite;
+      z-index: 5;
+    }
+
+    .node-play-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px 6px 0;
+      border-style: solid;
+      border-color: var(--green-primary) transparent;
+      display: block;
+      width: 0;
+    }
+
+    /* Level Locked Node Styling */
+    .node-btn.locked {
+      background-color: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      box-shadow: 0 8px 0 #cbd5e1;
+    }
+
+    /* RIGHT PANEL: CATO'S DAILY QUEST */
+    .quest-panel {
+      width: 240px;
+      background: var(--bg-white);
+      border: 4px solid var(--blue-primary);
+      border-radius: 28px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 0 #93c5fd, 0 10px 25px rgba(26, 128, 230, 0.05);
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .quest-header {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      color: var(--blue-dark);
+      border-bottom: 3px solid var(--blue-light);
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .quest-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .quest-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .quest-progress {
+      width: 100%;
+      height: 12px;
+      background-color: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .quest-bar {
+      height: 100%;
+      background-color: var(--green-primary);
+      width: 0%;
+      border-radius: 6px;
+      transition: width 0.3s ease;
+    }
+
+    .quest-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .quest-reward-stat {
+      background-color: var(--coral-light);
+      border: 2px solid var(--coral-primary);
+      border-radius: 16px;
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-title);
+      color: var(--coral-dark);
+      font-size: 0.95rem;
+      box-shadow: 0 4px 0 #fca5a5;
+    }
+
+    .quest-reward-stat span {
+      color: var(--text-dark);
+    }
+
+    /* FLOATING CAT TOYS DECORATION */
+    .floating-item {
+      position: absolute;
+      font-size: 2.25rem;
+      color: var(--blue-primary);
+      opacity: 0.15;
+      pointer-events: none;
+      animation: floatItem 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .yarn-1 { top: 20%; left: 5%; animation-delay: 0s; }
+    .bowl-1 { top: 55%; left: 8%; animation-delay: 1.5s; }
+    .mouse-1 { top: 80%; left: 6%; animation-delay: 3s; }
+    .yarn-2 { top: 40%; right: 6%; animation-delay: 0.8s; }
+    .bowl-2 { top: 75%; right: 7%; animation-delay: 2.2s; }
+
+    /* ==================================================== */
+    /* GAME OVER OVERLAY & POP-UP STYLING                   */
+    /* ==================================================== */
+    .game-over-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .game-over-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .game-over-card {
+      background: var(--bg-white);
+      border-radius: 36px;
+      padding: 3rem 2rem;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      border: 5px solid var(--coral-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .game-over-overlay.show .game-over-card { transform: scale(1); }
+    .tired-cato-avatar { font-size: 5rem; animation: floatMascot 3s ease-in-out infinite; margin-bottom: 0.5rem; }
+    .game-over-title { font-family: var(--font-title); font-size: 2rem; color: var(--coral-primary); }
+    .game-over-text { font-size: 1.15rem; font-weight: 500; color: var(--text-dark); line-height: 1.5; }
+
+    .reset-btn {
+      width: 100%;
+      padding: 1.1rem;
+      background: linear-gradient(135deg, var(--blue-primary) 0%, #1d4ed8 100%);
+      border: 3px solid #fff;
+      border-radius: 20px;
+      font-family: var(--font-title);
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #1e3a8a;
+      transition: all 0.15s ease;
+      margin-top: 0.75rem;
+    }
+
+    .reset-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #1e3a8a; }
+    .reset-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #1e3a8a; }
+
+    /* INFORMATIVE OVERLAY / TAP TO START FOR AUDIO */
+    .start-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      transition: opacity 0.4s ease;
+    }
+
+    .start-card {
+      background: var(--bg-white);
+      border-radius: 32px;
+      padding: 2.5rem;
+      max-width: 450px;
+      text-align: center;
+      border: 5px solid var(--blue-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .start-avatar { width: 100px; height: 100px; object-fit: contain; animation: floatMascot 3s ease-in-out infinite; }
+    .start-title { font-family: var(--font-title); font-size: 1.75rem; color: var(--blue-primary); }
+    
+    .start-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--coral-primary) 0%, var(--coral-dark) 100%);
+      border: 3px solid #fff;
+      border-radius: 20px;
+      font-family: var(--font-title);
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #7c2d12;
+      transition: all 0.15s ease;
+    }
+    .start-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #7c2d12; }
+    .start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #7c2d12; }
+
+    /* ANIMATIONS SYSTEM */
+    @keyframes floatMascot {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(2.5deg); }
+    }
+
+    @keyframes pulseStar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    @keyframes bounceCorrect {
+      0%, 100% { transform: scale(1); }
+      30% { transform: scale(1.12); }
+      50% { transform: scale(0.95); }
+      80% { transform: scale(1.03); }
+    }
+
+    @keyframes shakeMascot {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      20%, 60% { transform: translateX(-6px) rotate(-3deg); }
+      40%, 80% { transform: translateX(6px) rotate(3deg); }
+    }
+
+    @keyframes pulseActiveNode {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 0 #15803d, 0 0 0 0px rgba(34, 197, 94, 0.4); }
+      50% { transform: scale(1.06); box-shadow: 0 8px 0 #15803d, 0 0 0 15px rgba(34, 197, 94, 0); }
+    }
+
+    @keyframes bounceTooltip {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -6px); }
+    }
+
+    @keyframes floatItem {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(15deg); }
+    }
+
+    /* STAR EXPLOSION particles */
+    .star-particle {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background-color: #fbbf24;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      pointer-events: none;
+      animation: explodeStar 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+      z-index: 99;
+    }
+
+    @keyframes explodeStar {
+      0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(360deg); opacity: 0; }
+    }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .game-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .map-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .quest-panel {
+        width: 100%;
+        position: relative;
+        top: 0;
+      }
+      .speech-bubble {
+        font-size: 1.15rem;
+        padding: 1.5rem 3rem 1.5rem 1.5rem;
+      }
+      .choices-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .cato-avatar {
+        width: 130px;
+        height: 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TAP TO START OVERLAY FOR AUDIO COMPATIBILITY -->
+  <div class="start-overlay" id="start-overlay">
+    <div class="start-card">
+      <img src="cato_mascot.png" alt="Cato" class="start-avatar">
+      <h2 class="start-title">Hi! Aku Cato! 😸</h2>
+      <p style="font-weight: 500; color: var(--text-muted); margin-bottom: 0.5rem;">Yuk uji kepintaranmu dan kumpulkan combo terbanyak bareng aku! 🐾</p>
+      <button class="start-btn" id="start-btn">Mulai Petualangan! 🚀</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER DIALOG OVERLAY -->
+  <div class="game-over-overlay" id="game-over-overlay">
+    <div class="game-over-card">
+      <div class="tired-cato-avatar">😿</div>
+      <h2 class="game-over-title">Cato is tired! 🐾</h2>
+      <p class="game-over-text" id="game-over-msg">Nyawamu habis, Cato butuh istirahat sejenak. Yuk kumpulkan energi dan coba lagi!</p>
+      <button class="reset-btn" id="reset-btn">Ulangi Petualangan 🚀</button>
+    </div>
+  </div>
+
+  <!-- DECORATIVE BACKGROUND SHAPES -->
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+  <div class="bg-circle circle-3"></div>
+
+  <!-- FLOATING CAT TOYS FOR ADVENTURE MAP -->
+  <i class="fa-solid fa-cookie floating-item yarn-1" id="toy-yarn-1" style="display: none;"></i>
+  <i class="fa-solid fa-bowl-food floating-item bowl-1" id="toy-bowl-1" style="display: none;"></i>
+  <i class="fa-solid fa-ghost floating-item mouse-1" id="toy-mouse-1" style="display: none;"></i>
+  <i class="fa-solid fa-cookie-bite floating-item yarn-2" id="toy-yarn-2" style="display: none;"></i>
+  <i class="fa-solid fa-basketball floating-item bowl-2" id="toy-bowl-2" style="display: none;"></i>
+
+  <!-- HEADER & STATS BAR -->
+  <header>
+    <a href="index.html" class="btn-back" id="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> Beranda
+    </a>
+    
+    <!-- Health & Combo Bar -->
+    <div class="game-stats" id="header-game-stats">
+      <div class="combo-streak" id="combo-streak">
+        <i class="fa-solid fa-fire"></i> Combo: <span id="combo-count">0</span>
+      </div>
+      <div class="health-bar" id="health-bar-hearts">
+        <i class="fa-solid fa-heart heart-icon" data-heart="1"></i>
+        <i class="fa-solid fa-heart heart-icon" data-heart="2"></i>
+        <i class="fa-solid fa-heart heart-icon" data-heart="3"></i>
+      </div>
+    </div>
+    
+    <div class="logo-container">
+      <img src="cato_mascot.png" alt="ENGCATO Logo" class="logo-img">
+      <span class="logo-text">ENGCATO</span>
+    </div>
+  </header>
+
+  <!-- MAIN STAGE -->
+  <main class="main-stage">
+    
+    <!-- STAGE A: KUIS WORKSPACE -->
+    <div class="app-stage" id="quiz-stage">
+      <div class="stage-title-banner" id="quiz-stage-title">
+        Level 1: Soal 1 dari 5
+      </div>
+      
+      <!-- Speech Bubble -->
+      <div class="speech-bubble-container">
+        <div class="speech-bubble" id="cato-bubble">
+          Loading adventure... 🐾
+        </div>
+        <button class="btn-speaker" id="btn-audio-repeat" aria-label="Ulangi Suara Cato">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+
+      <!-- Mascot Avatar -->
+      <div class="mascot-container">
+        <div class="cato-avatar-wrapper">
+          <img src="cato_mascot.png" alt="Cato Mascot" class="cato-avatar" id="cato-avatar-img">
+          <div class="expression-badge" id="expression-badge">😸</div>
+          <div class="star-badge" id="cato-stars" style="display: none;">
+            <i class="fa-solid fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choice Buttons -->
+      <div class="choices-container" id="choices-grid">
+        <button class="choice-btn" id="btn-opt-a" data-choice="A">
+          <span class="choice-label">Pilihan A</span>
+          <span class="choice-text" id="text-opt-a">A</span>
+        </button>
+        <button class="choice-btn" id="btn-opt-b" data-choice="B">
+          <span class="choice-label">Pilihan B</span>
+          <span class="choice-text" id="text-opt-b">B</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STAGE B: ADVENTURE MAP (CATO'S PAW ROADMAP) -->
+    <div class="app-stage hidden-stage" id="map-stage">
+      <div class="map-wrapper">
+        <div class="map-content-container">
+          <!-- Scratching Post Banner -->
+          <div class="scratching-post-banner">
+            <h2 id="map-banner-title">🐾 UNIT 1 SELESAI: Cato Kenyang! 🐟</h2>
+            <p id="map-banner-sub">Meow-velous! Kamu berhasil membantu Cato mengumpulkan energi. Yuk, buka level selanjutnya!</p>
+          </div>
+          
+          <!-- The Paw Print Path -->
+          <div class="path-container">
+            <!-- Level 1 (Completed Gold Fish) -->
+            <div class="path-node">
+              <button class="node-btn completed" id="node-level-1" aria-label="Level 1: Selesai">
+                <i class="fa-solid fa-fish"></i>
+                <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                <span class="node-level-label">Level 1: Hunt Fish</span>
+              </button>
+            </div>
+            
+            <!-- Level 2 (Active Pulsing Green Paw) -->
+            <div class="path-node">
+              <div class="node-play-tooltip" id="node-tooltip">MAIN 🐾</div>
+              <button class="node-btn active" id="node-level-2" aria-label="Level 2: Mulai Main">
+                <i class="fa-solid fa-paw"></i>
+                <span class="node-level-label">Level 2: Days & Months</span>
+              </button>
+            </div>
+            
+            <!-- Level 3 (Locked Cat Padlock) -->
+            <div class="path-node">
+              <button class="node-btn locked" id="node-level-3" aria-label="Level 3: Terkunci">
+                <i class="fa-solid fa-lock"></i>
+                <span class="node-level-label">Level 3: School Objects</span>
+              </button>
+            </div>
+            
+            <!-- Level 4 (Locked Cat Padlock) -->
+            <div class="path-node">
+              <button class="node-btn locked" id="node-level-4" aria-label="Level 4: Terkunci">
+                <i class="fa-solid fa-lock"></i>
+                <span class="node-level-label">Level 4: Colors Fun</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right side panel stats -->
+        <div class="quest-panel">
+          <div class="quest-header">
+            <i class="fa-solid fa-trophy"></i> Cato's Quest
+          </div>
+          
+          <div class="quest-item">
+            <div class="quest-label">
+              <span>🍖 Beri Makan Cato</span>
+            </div>
+            <div class="quest-progress">
+              <div class="quest-bar" id="quest-feed-bar" style="width: 100%;"></div>
+            </div>
+            <div class="quest-sub" id="quest-feed-label">1/1 Selesai</div>
+          </div>
+          
+          <div class="quest-item">
+            <div class="quest-label">
+              <span>💎 Energi Kucing</span>
+            </div>
+            <div class="quest-reward-stat">
+              <i class="fa-solid fa-gem"></i>
+              <span id="quest-points">50 Purr-Points</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- GAME LOGIC & WEB SPEECH API ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. BANK SOAL 10 SOAL KATEGORIS (Unit 1: Q1-Q5, Unit 2: Q6-Q10)
+      const quizData = [
+        // Level 1: Unit 1 to 6 (Campuran Level 1)
+        {
+          unit: "Unit 1: Numbers",
+          questionText: "Let's count! I have 12 pencils on my desk. How do you say 12 in English? Is it Twelve or Thirteen?",
+          options: {
+            A: "Twelve",
+            B: "Thirteen"
+          },
+          correct: "A",
+          voiceText: "Let's count! I have twelve pencils on my desk. How do you say twelve in English? Is it Twelve or Thirteen?"
+        },
+        {
+          unit: "Unit 2: Day & Month",
+          questionText: "What is the first day of the week after Saturday? Is it Sunday or Monday?",
+          options: {
+            A: "Monday",
+            B: "Sunday"
+          },
+          correct: "B",
+          voiceText: "What is the first day of the week after Saturday? Is it Sunday or Monday?"
+        },
+        {
+          unit: "Unit 3: Colours",
+          questionText: "Look at my orange glasses! What color is orange in Indonesian? Is it Jingga or Hijau?",
+          options: {
+            A: "Hijau",
+            B: "Jingga"
+          },
+          correct: "B",
+          voiceText: "Look at my orange glasses! What color is orange in Indonesian? Is it Jingga or Hijau?"
+        },
+        {
+          unit: "Unit 5: My Body",
+          questionText: "Touch your face! What do you use to speak and smile? Is it Mouth or Shoulder?",
+          options: {
+            A: "Shoulder",
+            B: "Mouth"
+          },
+          correct: "B",
+          voiceText: "Touch your face! What do you use to speak and smile? Is it Mouth or Shoulder?"
+        },
+        {
+          unit: "Unit 6: School Objects",
+          questionText: "Look at your study desk! What is a 'ruler' in Indonesian? Is it Penggaris or Penghapus?",
+          options: {
+            A: "Penghapus",
+            B: "Penggaris"
+          },
+          correct: "B",
+          voiceText: "Look at your study desk! What is a ruler in Indonesian? Is it Penggaris or Penghapus?"
+        },
+        
+        // Level 2: Unit 2 (Days & Months Khusus dari teyl.json)
+        {
+          unit: "Unit 2: Days & Months",
+          questionText: "What is the day after Monday? Is it Tuesday or Thursday?",
+          options: {
+            A: "Thursday",
+            B: "Tuesday"
+          },
+          correct: "B",
+          voiceText: "What is the day after Monday? Is it Tuesday or Thursday?"
+        },
+        {
+          unit: "Unit 2: Days & Months",
+          questionText: "How many days are in a week? Is it Seven or Eight?",
+          options: {
+            A: "Seven",
+            B: "Eight"
+          },
+          correct: "A",
+          voiceText: "How many days are in a week? Is it Seven or Eight?"
+        },
+        {
+          unit: "Unit 2: Days & Months",
+          questionText: "What month comes after January? Is it March or February?",
+          options: {
+            A: "February",
+            B: "March"
+          },
+          correct: "A",
+          voiceText: "What month comes after January? Is it March or February?"
+        },
+        {
+          unit: "Unit 2: Days & Months",
+          questionText: "Which month is the last month of the year? Is it November or December?",
+          options: {
+            A: "December",
+            B: "November"
+          },
+          correct: "A",
+          voiceText: "Which month is the last month of the year? Is it November or December?"
+        },
+        {
+          unit: "Unit 2: Days & Months",
+          questionText: "If today is Sunday, what day was yesterday? Is it Friday or Saturday?",
+          options: {
+            A: "Friday",
+            B: "Saturday"
+          },
+          correct: "B",
+          voiceText: "If today is Sunday, what day was yesterday? Is it Friday or Saturday?"
+        }
+      ];
+
+      // DOM ELEMENTS
+      const startOverlay = document.getElementById('start-overlay');
+      const startBtn = document.getElementById('start-btn');
+      
+      const gameOverOverlay = document.getElementById('game-over-overlay');
+      const resetBtn = document.getElementById('reset-btn');
+      const gameOverMsg = document.getElementById('game-over-msg');
+      
+      const headerGameStats = document.getElementById('header-game-stats');
+      const quizStage = document.getElementById('quiz-stage');
+      const quizStageTitle = document.getElementById('quiz-stage-title');
+      const catoBubble = document.getElementById('cato-bubble');
+      const catoAvatarImg = document.getElementById('cato-avatar-img');
+      const expressionBadge = document.getElementById('expression-badge');
+      const catoStars = document.getElementById('cato-stars');
+      
+      const btnOptA = document.getElementById('btn-opt-a');
+      const btnOptB = document.getElementById('btn-opt-b');
+      const textOptA = document.getElementById('text-opt-a');
+      const textOptB = document.getElementById('text-opt-b');
+      
+      const btnAudioRepeat = document.getElementById('btn-audio-repeat');
+      const comboCountSpan = document.getElementById('combo-count');
+      const heartIcons = document.querySelectorAll('.heart-icon');
+
+      // MAP ELEMENTS
+      const mapStage = document.getElementById('map-stage');
+      const nodeLevel1 = document.getElementById('node-level-1');
+      const nodeLevel2 = document.getElementById('node-level-2');
+      const nodeLevel3 = document.getElementById('node-level-3');
+      const nodeLevel4 = document.getElementById('node-level-4');
+      const nodeTooltip = document.getElementById('node-tooltip');
+      const mapBannerTitle = document.getElementById('map-banner-title');
+      const mapBannerSub = document.getElementById('map-banner-sub');
+      const questFeedBar = document.getElementById('quest-feed-bar');
+      const questFeedLabel = document.getElementById('quest-feed-label');
+      const questPoints = document.getElementById('quest-points');
+
+      // Floating items elements
+      const toyYarn1 = document.getElementById('toy-yarn-1');
+      const toyBowl1 = document.getElementById('toy-bowl-1');
+      const toyMouse1 = document.getElementById('toy-mouse-1');
+      const toyYarn2 = document.getElementById('toy-yarn-2');
+      const toyBowl2 = document.getElementById('toy-bowl-2');
+
+      // STATE VARIABLES
+      let currentQuestionIndex = 0;
+      let isTransitioning = false;
+      let hasInteracted = false;
+      let currentActiveLevel = 1; // 1 = Level 1 (Q1-5), 2 = Level 2 (Q6-10), 3 = Level 3 (Done)
+      
+      // Health & Combo
+      let health = 3;
+      let combo = 0;
+      let purrPoints = 0;
+
+      // 2. TEXT-TO-SPEECH (pitch 1.4, rate 0.85, lang='en-US')
+      const playCatoVoice = (text, callback) => {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        utterance.pitch = 1.4;
+
+        const voices = window.speechSynthesis.getVoices();
+        const childVoice = voices.find(v => v.lang.startsWith('en') && (
+          v.name.includes('Google') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Zira') || 
+          v.name.includes('Samantha')
+        ));
+        
+        if (childVoice) utterance.voice = childVoice;
+        if (callback) utterance.onend = callback;
+
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // 3. LOAD QUESTION LOGIC
+      const loadQuestion = (index) => {
+        isTransitioning = false;
+        currentQuestionIndex = index;
+
+        // Reset state tombol pilihan
+        [btnOptA, btnOptB].forEach(btn => {
+          btn.className = 'choice-btn';
+          btn.disabled = false;
+        });
+
+        // Reset Cato avatar
+        catoAvatarImg.className = 'cato-avatar';
+        expressionBadge.textContent = '😸';
+
+        const currentData = quizData[currentQuestionIndex];
+        const relativeIndex = (currentQuestionIndex % 5) + 1;
+
+        // Tampilkan teks pertanyaan
+        catoBubble.style.opacity = 0;
+        setTimeout(() => {
+          catoBubble.textContent = `[${currentData.unit}] 🐾 ${currentData.questionText}`;
+          catoBubble.style.opacity = 1;
+          
+          if (hasInteracted) {
+            playCatoVoice(currentData.voiceText);
+          }
+        }, 150);
+
+        textOptA.textContent = currentData.options.A;
+        textOptB.textContent = currentData.options.B;
+
+        // Set banner title
+        quizStageTitle.textContent = `Level ${currentActiveLevel}: Soal ${relativeIndex} dari 5`;
+      };
+
+      // Confetti particles
+      const spawnStarParticles = () => {
+        const bounds = catoAvatarImg.getBoundingClientRect();
+        const originX = bounds.left + bounds.width / 2;
+        const originY = bounds.top + bounds.height / 2;
+        
+        for (let i = 0; i < 20; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('star-particle');
+          particle.style.left = `${originX + window.scrollX - 11}px`;
+          particle.style.top = `${originY + window.scrollY - 11}px`;
+          
+          const tx = (Math.random() - 0.5) * 280;
+          const ty = (Math.random() - 0.5) * 280 - 70;
+          particle.style.setProperty('--tx', `${tx}px`);
+          particle.style.setProperty('--ty', `${ty}px`);
+          
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 900);
+        }
+      };
+
+      const updateHeartsVisual = () => {
+        heartIcons.forEach((icon, idx) => {
+          if (idx < health) {
+            icon.className = 'fa-solid fa-heart heart-icon';
+          } else {
+            icon.className = 'fa-regular fa-heart heart-icon lost';
+          }
+        });
+      };
+
+      // 4. EVALUATE ANSWER
+      const handleAnswer = (selectedChoice, btnElement) => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const currentData = quizData[currentQuestionIndex];
+        const isCorrect = selectedChoice === currentData.correct;
+
+        btnOptA.disabled = true;
+        btnOptB.disabled = true;
+
+        if (isCorrect) {
+          btnElement.classList.add('correct');
+          combo++;
+          comboCountSpan.textContent = combo;
+
+          // Cato happy state
+          catoAvatarImg.classList.add('state-correct');
+          expressionBadge.textContent = '🎉';
+          
+          catoStars.style.display = 'flex';
+          spawnStarParticles();
+
+          catoBubble.style.opacity = 0;
+          setTimeout(() => {
+            catoBubble.textContent = "Excellent! Great job! 🎉";
+            catoBubble.style.opacity = 1;
+            playCatoVoice("Excellent! Great job!");
+          }, 150);
+
+          // CHECK TRANSITION AFTER 2 SECONDS
+          setTimeout(() => {
+            catoStars.style.display = 'none';
+            
+            // Check if level is completed (finished question 5 or 10)
+            const isEndOfLevel1 = currentQuestionIndex === 4;
+            const isEndOfLevel2 = currentQuestionIndex === 9;
+
+            if (isEndOfLevel1) {
+              currentActiveLevel = 2;
+              purrPoints = 50;
+              transitionToMap();
+            } else if (isEndOfLevel2) {
+              currentActiveLevel = 3;
+              purrPoints = 100;
+              transitionToMap();
+            } else {
+              loadQuestion(currentQuestionIndex + 1);
+            }
+          }, 2000);
+
+        } else {
+          // JAWABAN SALAH
+          btnElement.classList.add('incorrect');
+          combo = 0;
+          comboCountSpan.textContent = combo;
+          
+          health--;
+          updateHeartsVisual();
+
+          catoAvatarImg.classList.add('state-incorrect');
+          expressionBadge.textContent = '😿';
+
+          catoBubble.style.opacity = 0;
+          setTimeout(() => {
+            catoBubble.textContent = "Oh no, let's try again! 🌟";
+            catoBubble.style.opacity = 1;
+            playCatoVoice("Oh no, let's try again!");
+          }, 150);
+
+          setTimeout(() => {
+            if (health <= 0) {
+              triggerGameOver();
+            } else {
+              btnElement.classList.remove('incorrect');
+              btnOptA.disabled = false;
+              btnOptB.disabled = false;
+              isTransitioning = false;
+              
+              catoAvatarImg.className = 'cato-avatar';
+              expressionBadge.textContent = '😸';
+
+              catoBubble.style.opacity = 0;
+              setTimeout(() => {
+                catoBubble.textContent = `[${currentData.unit}] 🐾 ${currentData.questionText}`;
+                catoBubble.style.opacity = 1;
+              }, 150);
+            }
+          }, 2500);
+        }
+      };
+
+      // 5. ROADMAP TRANSITION (FADE TRANSITION)
+      const transitionToMap = () => {
+        // Hentikan stats header & kuis stage
+        headerGameStats.style.opacity = 0;
+        quizStage.classList.add('hidden-stage');
+        
+        // Tampilkan floating background toys
+        [toyYarn1, toyBowl1, toyMouse1, toyYarn2, toyBowl2].forEach(toy => {
+          toy.style.display = 'block';
+        });
+
+        // Set Quest progress di panel kanan
+        if (currentActiveLevel === 2) {
+          questFeedBar.style.width = '100%';
+          questFeedLabel.textContent = '1/1 Selesai';
+          questPoints.textContent = `${purrPoints} Purr-Points`;
+        } else if (currentActiveLevel === 3) {
+          questFeedBar.style.width = '100%';
+          questFeedLabel.textContent = '2/2 Selesai! 🍖🐟';
+          questPoints.textContent = `${purrPoints} Purr-Points`;
+        }
+
+        // Jalankan selebrasi transisi kuis level selesai
+        playCatoVoice("Purr-fect! You are amazing! Let's continue our cat adventure!");
+
+        // Ubah status level pada peta
+        updateMapNodesState();
+
+        // Tampilkan map stage
+        setTimeout(() => {
+          mapStage.classList.remove('hidden-stage');
+        }, 500);
+      };
+
+      const updateMapNodesState = () => {
+        if (currentActiveLevel === 2) {
+          // Level 1: Selesai, Level 2: Aktif
+          mapBannerTitle.textContent = "🐾 UNIT 1 SELESAI: Cato Kenyang! 🐟";
+          mapBannerSub.textContent = "Meow-velous! Kamu berhasil membantu Cato mengumpulkan energi. Yuk, buka level selanjutnya!";
+          
+          nodeLevel1.className = "node-btn completed";
+          nodeLevel1.innerHTML = '<i class="fa-solid fa-fish"></i><div class="check-badge"><i class="fa-solid fa-check"></i></div><span class="node-level-label">Level 1: Hunt Fish</span>';
+          
+          nodeLevel2.className = "node-btn active";
+          nodeLevel2.innerHTML = '<i class="fa-solid fa-paw"></i><span class="node-level-label">Level 2: Days & Months</span>';
+          nodeTooltip.style.display = 'block';
+          
+          nodeLevel3.className = "node-btn locked";
+          nodeLevel3.innerHTML = '<i class="fa-solid fa-lock"></i><span class="node-level-label">Level 3: School Objects</span>';
+        } else if (currentActiveLevel === 3) {
+          // Level 1 & 2: Selesai, Level 3: Aktif (Simulasi)
+          mapBannerTitle.textContent = "🐾 UNIT 2 SELESAI: Cato Cerdas! 🥛";
+          mapBannerSub.textContent = "Meow-gical! Kamu berhasil menyelesaikan kuis Kalender & Hari. Cato sangat bangga padamu!";
+          
+          nodeLevel1.className = "node-btn completed";
+          nodeLevel1.innerHTML = '<i class="fa-solid fa-fish"></i><div class="check-badge"><i class="fa-solid fa-check"></i></div><span class="node-level-label">Level 1: Hunt Fish</span>';
+          
+          nodeLevel2.className = "node-btn completed";
+          nodeLevel2.innerHTML = '<i class="fa-solid fa-bowl-food"></i><div class="check-badge"><i class="fa-solid fa-check"></i></div><span class="node-level-label">Level 2: Days & Months</span>';
+          nodeTooltip.textContent = "HEBAT! ⭐";
+          nodeTooltip.style.display = 'block';
+          nodeTooltip.style.backgroundColor = 'var(--yellow-dark)';
+          nodeTooltip.style.boxShadow = '0 4px 10px rgba(217, 119, 6, 0.3)';
+          
+          nodeLevel3.className = "node-btn active";
+          nodeLevel3.innerHTML = '<i class="fa-solid fa-paw"></i><span class="node-level-label">Level 3: School Objects</span>';
+        }
+      };
+
+      // CLICK ACTIVE LEVEL 2 NODE -> START LEVEL 2 (Q6-Q10)
+      nodeLevel2.addEventListener('click', () => {
+        if (currentActiveLevel === 2) {
+          startLevel(2);
+        }
+      });
+
+      // START A LEVEL FROM THE ROADMAP
+      const startLevel = (levelNum) => {
+        // Reset Health & Combo
+        health = 3;
+        combo = 0;
+        comboCountSpan.textContent = combo;
+        updateHeartsVisual();
+
+        // Fade out map
+        mapStage.classList.add('hidden-stage');
+        
+        // Hide floating backgrounds
+        [toyYarn1, toyBowl1, toyMouse1, toyYarn2, toyBowl2].forEach(toy => {
+          toy.style.display = 'none';
+        });
+
+        // Tampilkan stats bar & kuis stage
+        setTimeout(() => {
+          headerGameStats.style.opacity = 1;
+          quizStage.classList.remove('hidden-stage');
+          
+          // Mulai muat soal 6 jika level 2
+          if (levelNum === 2) {
+            loadQuestion(5); // Q6
+          } else {
+            loadQuestion(0); // Q1
+          }
+        }, 500);
+      };
+
+      // 6. GAME OVER LOGIC
+      const triggerGameOver = () => {
+        window.speechSynthesis.cancel();
+        
+        if (currentQuestionIndex >= 5) {
+          gameOverMsg.textContent = "Nyawamu habis pada Unit 2: Days & Months! Cato butuh istirahat sejenak. Yuk kumpulkan energi untuk mencoba lagi!";
+        } else {
+          gameOverMsg.textContent = "Nyawamu habis pada Unit 1! Cato butuh istirahat sejenak. Yuk kumpulkan energi untuk mencoba lagi!";
+        }
+
+        playCatoVoice("Cato is tired! Let's recharge and try again!");
+        gameOverOverlay.classList.add('show');
+      };
+
+      // 7. RESET ADVENTURE
+      const resetGame = () => {
+        health = 3;
+        combo = 0;
+        comboCountSpan.textContent = combo;
+        updateHeartsVisual();
+        
+        gameOverOverlay.classList.remove('show');
+        
+        // Mulai kembali dari awal Level saat ini
+        if (currentQuestionIndex >= 5) {
+          loadQuestion(5); // Ulang dari Soal 6 (Level 2)
+        } else {
+          loadQuestion(0); // Ulang dari Soal 1 (Level 1)
+        }
+      };
+
+      // EVENT LISTENERS
+      startBtn.addEventListener('click', () => {
+        hasInteracted = true;
+        startOverlay.style.opacity = 0;
+        setTimeout(() => {
+          startOverlay.style.display = 'none';
+          
+          // Mulai soal pertama
+          loadQuestion(0);
+        }, 400);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        resetGame();
+      });
+
+      btnAudioRepeat.addEventListener('click', () => {
+        if (currentQuestionIndex < quizData.length && health > 0) {
+          playCatoVoice(quizData[currentQuestionIndex].voiceText);
+        }
+      });
+
+      btnOptA.addEventListener('click', () => {
+        handleAnswer('A', btnOptA);
+      });
+
+      btnOptB.addEventListener('click', () => {
+        handleAnswer('B', btnOptB);
+      });
+
+      // Load data awal soal di belakang layar
+      loadQuestion(0);
+
+      // Inisialisasi daftar suara asinkron untuk kestabilan Web Speech API
+      if (window.speechSynthesis) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+    });
+  </script>
+</body>
+</html>
